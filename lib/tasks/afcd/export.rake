@@ -1,12 +1,9 @@
-# lib/tasks/afcd_export.rake
-#
+# frozen_string_literal: true
+
 # Usage:
 #   bundle exec rake afcd:export_csv
 #   bundle exec rake afcd:export_csv XLSX_PATH=/custom/path/to/file.xlsx
 #   bundle exec rake afcd:export_csv OUTPUT_PATH=/tmp/nutrients.csv
-#
-# The generated CSV is written to public/afcd_nutrients.csv by default,
-# making it directly downloadable via /afcd_nutrients.csv in Rails.
 
 require "csv"
 
@@ -43,6 +40,6 @@ namespace :afcd do
       end
     end
 
-    puts "Done — #{File.size(output_path)} bytes written to #{output_path}"
+    puts "Done. #{File.size(output_path)} bytes written to #{output_path}"
   end
 end
