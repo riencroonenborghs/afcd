@@ -9,7 +9,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 gem "bootsnap", require: false
-gem "roo", "~> 3.0"
+gem "fast-mcp", "~> 1.6"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -17,6 +17,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "annotaterb", "~> 4.22"
   gem "awesome_print", "~> 1.9"
+  gem "roo", "~> 3.0"
 end
 
 group :development do
