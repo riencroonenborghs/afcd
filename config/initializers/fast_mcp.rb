@@ -33,10 +33,10 @@ FastMcp.mount_in_rails(
     # FastMcp will automatically discover and register:
     # - All classes that inherit from ApplicationTool (which uses ActionTool::Base)
     # - All classes that inherit from ApplicationResource (which uses ActionResource::Base)
-    server.register_tools(*ApplicationTool.descendants)
-    server.register_resources(*ApplicationResource.descendants)
+    # server.register_tools(*ApplicationTool.descendants)
+    # server.register_resources(*ApplicationResource.descendants)
     # alternatively, you can register tools and resources manually:
-    # server.register_tool(MyTool)
+    server.register_tool(FoodTool)
     # server.register_resource(MyResource)
   end
 end

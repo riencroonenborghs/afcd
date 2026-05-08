@@ -290,4 +290,12 @@ class Food < ApplicationRecord
   def self.search(query)
     where("name = ?", "%$#{query}%").order(name: :desc)
   end
+
+  def as_json(verbose: false)
+    if verbose
+      attributes.except("id", "classification", "created_at", "updated_at", "public_food_key").compact
+    else
+      attributes.slice("food_name", "energy_kj", "protein_g", "fat_g", "carbohydrate_g", "fibre_g")
+    end
+  end
 end
