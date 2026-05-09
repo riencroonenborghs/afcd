@@ -25,7 +25,7 @@ class FoodTool < ApplicationTool
     limit = [limit.to_i.clamp(1, 50), 50].min
 
     scope = Food
-    scope = scope.where("food_name ILIKE ?", "%#{query}%")
+    scope = scope.where("LOWER(food_name) LIKE LOWER(?)", "%#{query}%")
     scope = scope.limit(limit)
 
     results = scope.map { |food| food.as_json(verbose: verbose) }

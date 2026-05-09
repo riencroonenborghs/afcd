@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec *)",
+      "Bash(context7 --help)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh repo *)",
+      "WebSearch",
+      "WebFetch(domain:rubydoc.info)",
+      "Bash(chmod +x /Users/riencroonenborghs/Code/personal/mcp/afcd/scripts/test_mcp.sh)",
+      "Bash(bash /Users/riencroonenborghs/Code/personal/mcp/afcd/scripts/test_mcp.sh)",
+      "Bash(echo \"exit: $?\")"
+    ]
+  }
+}
