@@ -1,1 +1,1 @@
-web: env RUBY_DEBUG_OPEN=true bin/rails server
+web: env RUBY_DEBUG_OPEN=true bin/rails server -b 'ssl://localhost:3000?key=./certs/localhost-key.pem&cert=./certs/localhost.pem'
