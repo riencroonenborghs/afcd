@@ -289,13 +289,24 @@
 class Food < ApplicationRecord
   def as_json(verbose: false)
     if verbose
-      attributes.except("id", "created_at", "updated_at").compact
+      attrs = attributes.except("id", "created_at", "updated_at").compact
+      attrs["energy_with_dietary_fibre_equated_kcal"] = kj_to_kcal(attrs["energy_with_dietary_fibre_equated"]) if attrs["energy_with_dietary_fibre_equated"]
+      attrs["energy_without_dietary_fibre_equated_kcal"] = kj_to_kcal(attrs["energy_without_dietary_fibre_equated"]) if attrs["energy_without_dietary_fibre_equated"]
+      attrs
     else
-      attributes.slice(
+      attrs = attributes.slice(
         "public_food_key", "food_name", "classification",
         "energy_with_dietary_fibre_equated", "protein", "fat_total",
         "available_carbohydrate_without_sugar_alcohols", "total_dietary_fibre"
       ).compact
+      attrs["energy_with_dietary_fibre_equated_kcal"] = kj_to_kcal(attrs["energy_with_dietary_fibre_equated"]) if attrs["energy_with_dietary_fibre_equated"]
+      attrs
     end
+  end
+
+  private
+
+  def kj_to_kcal(kj)
+    (kj * 0.239006).round(1)
   end
 end

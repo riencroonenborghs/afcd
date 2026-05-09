@@ -16,7 +16,7 @@ class FoodTool < ApplicationTool
   )
 
   arguments do
-    required(:query).filled(:string).description("Food name or partial name")
+    required(:query).filled(:string).description("Food name, partial name or fuzzy search")
     optional(:verbose).maybe(:bool).description("Verbose output")
     optional(:limit).maybe(:integer).description("Max. rows to return (default 10, max 50)")
   end
@@ -24,9 +24,18 @@ class FoodTool < ApplicationTool
   def call(query:, verbose: false, limit: 10)
     limit = [limit.to_i.clamp(1, 50), 50].min
 
-    scope = Food
-    scope = scope.where("LOWER(food_name) LIKE LOWER(?)", "%#{query}%")
-    scope = scope.limit(limit)
+    fts_query = query.split.map { |w| "#{w}*" }.join(" ")
+    matched_ids = ActiveRecord::Base.connection.select_values(
+      "SELECT rowid FROM foods_fts WHERE foods_fts MATCH #{ActiveRecord::Base.connection.quote(fts_query)} LIMIT #{limit}"
+    )
+
+    scope = if matched_ids.any?
+      Food.where(id: matched_ids)
+    else
+      Food.where("LOWER(food_name) LIKE LOWER(?)", "%#{query}%").limit(limit)
+    end
+
+    Rails.logger.info("[FoodTool] query: #{query} - found #{scope.count}")
 
     results = scope.map { |food| food.as_json(verbose: verbose) }
 

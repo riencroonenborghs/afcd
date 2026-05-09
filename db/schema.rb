@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_08_084716) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_09_064629) do
   create_table "foods", force: :cascade do |t|
     t.string "public_food_key", null: false
     t.string "classification"
@@ -290,4 +290,24 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_08_084716) do
     t.index ["food_name"], name: "index_foods_on_food_name"
     t.index ["public_food_key"], name: "index_foods_on_public_food_key", unique: true
   end
+
+# Could not dump table "foods_fts" because of following StandardError
+#   Unknown type '' for column 'food_name'
+
+
+# Could not dump table "foods_fts_config" because of following StandardError
+#   Unknown type '' for column 'k'
+
+
+  create_table "foods_fts_data", force: :cascade do |t|
+    t.binary "block"
+  end
+
+  create_table "foods_fts_docsize", force: :cascade do |t|
+    t.binary "sz"
+  end
+
+# Could not dump table "foods_fts_idx" because of following StandardError
+#   Unknown type '' for column 'segid'
+
 end

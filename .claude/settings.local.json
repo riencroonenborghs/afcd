@@ -9,7 +9,13 @@
       "WebFetch(domain:rubydoc.info)",
       "Bash(chmod +x /Users/riencroonenborghs/Code/personal/mcp/afcd/scripts/test_mcp.sh)",
       "Bash(bash /Users/riencroonenborghs/Code/personal/mcp/afcd/scripts/test_mcp.sh)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(ruby *)",
+      "Bash(sqlite3 --version)",
+      "Bash(sqlite3 :memory: \"PRAGMA compile_options;\")",
+      "Bash(bin/rails generate *)",
+      "Bash(bin/rails db:migrate *)",
+      "Bash(bin/rails runner *)"
     ]
   }
 }
