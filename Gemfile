@@ -23,3 +23,16 @@ end
 group :development do
   gem "web-console"
 end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'        # or capistrano-rvm depending on your ruby manager
+  gem "capistrano3-puma", "~> 7.1"
+  gem 'capistrano-nvm', require: false
+
+  # capistrano
+  gem "ed25519", "~> 1.4" 
+  gem "bcrypt_pbkdf", "~> 1.1"
+end
