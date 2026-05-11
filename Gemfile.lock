@@ -110,10 +110,10 @@ GEM
     capistrano-rbenv (2.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capistrano3-puma (7.1.0)
+    capistrano3-puma (8.0.0)
       capistrano (~> 3.7)
       capistrano-bundler
-      puma (>= 6.1, < 8.0)
+      puma (>= 6.1, < 9.0)
     cgi (0.5.1)
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
@@ -409,7 +409,7 @@ DEPENDENCIES
   capistrano-nvm
   capistrano-rails
   capistrano-rbenv
-  capistrano3-puma (~> 7.1)
+  capistrano3-puma (~> 8.0)
   debug
   dotenv-rails (~> 3.2)
   ed25519 (~> 1.4)
