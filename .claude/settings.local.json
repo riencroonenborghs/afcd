@@ -15,7 +15,9 @@
       "Bash(sqlite3 :memory: \"PRAGMA compile_options;\")",
       "Bash(bin/rails generate *)",
       "Bash(bin/rails db:migrate *)",
-      "Bash(bin/rails runner *)"
+      "Bash(bin/rails runner *)",
+      "Bash(bundle install *)",
+      "Bash(bin/rails routes *)"
     ]
   }
 }

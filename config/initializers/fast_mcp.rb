@@ -1,42 +1,33 @@
 # frozen_string_literal: true
 
-# FastMcp - Model Context Protocol for Rails
-# This initializer sets up the MCP middleware in your Rails application.
-#
-# In Rails applications, you can use:
-# - ActionTool::Base as an alias for FastMcp::Tool
-# - ActionResource::Base as an alias for FastMcp::Resource
-#
-# All your tools should inherit from ApplicationTool which already uses ActionTool::Base,
-# and all your resources should inherit from ApplicationResource which uses ActionResource::Base.
-
-# Mount the MCP middleware in your Rails application
-# You can customize the options below to fit your needs.
 require "fast_mcp"
+require_relative "../../app/middleware/oauth_mcp_transport"
 
-FastMcp.mount_in_rails(
-  Rails.application,
-  name: Rails.application.class.module_parent_name.underscore.dasherize,
-  version: "1.0.0",
-  path_prefix: "/mcp", # This is the default path prefix
-  messages_route: "messages", # This is the default route for the messages endpoint
-  sse_route: "sse", # This is the default route for the SSE endpoint
-  # Add allowed origins below, it defaults to Rails.application.config.hosts
-  # allowed_origins: ["localhost", "127.0.0.1", "[::1]", "example.com", /.*\.example\.com/],
-  # localhost_only: true, # Set to false to allow connections from other hosts
-  # whitelist specific ips to if you want to run on localhost and allow connections from other IPs
-  # allowed_ips: ["127.0.0.1", "::1"],
-  authenticate: ENV["MCP_AUTH_TOKEN"].present?,
-  auth_token: ENV["MCP_AUTH_TOKEN"],
-) do |server|
-  Rails.application.config.after_initialize do
-    # FastMcp will automatically discover and register:
-    # - All classes that inherit from ApplicationTool (which uses ActionTool::Base)
-    # - All classes that inherit from ApplicationResource (which uses ActionResource::Base)
-    # server.register_tools(*ApplicationTool.descendants)
-    # server.register_resources(*ApplicationResource.descendants)
-    # alternatively, you can register tools and resources manually:
-    server.register_tool(FoodTool)
-    # server.register_resource(MyResource)
-  end
+app = Rails.application
+name = app.class.module_parent_name.underscore.dasherize
+logger = Rails.logger
+path_prefix = "/mcp"
+messages_route = "messages"
+sse_route = "sse"
+
+FastMcp.server = FastMcp::Server.new(name: name, version: "1.0.0", logger: logger)
+
+FastMcp.server.transport_klass = OauthMcpTransport
+
+app.config.after_initialize do
+  FastMcp.server.register_tool(FoodTool)
 end
+
+allowed_origins = FastMcp.default_rails_allowed_origins(app)
+
+app.middleware.use(
+  OauthMcpTransport,
+  FastMcp.server,
+  logger: logger,
+  allowed_origins: allowed_origins,
+  localhost_only: Rails.env.local?,
+  path_prefix: path_prefix,
+  messages_route: messages_route,
+  sse_route: sse_route,
+  auth_token: "oauth", # non-nil so auth_enabled? is true; actual validation is in valid_token?
+)

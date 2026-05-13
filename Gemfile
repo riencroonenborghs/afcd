@@ -11,6 +11,7 @@ gem "jbuilder"
 gem "bootsnap", require: false
 gem "fast-mcp", "~> 1.6"
 gem "dotenv-rails", "~> 3.2"
+gem "bcrypt", "~> 3.1"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

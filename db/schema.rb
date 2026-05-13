@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_09_064629) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_13_032437) do
   create_table "foods", force: :cascade do |t|
     t.string "public_food_key", null: false
     t.string "classification"
@@ -310,4 +310,43 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_09_064629) do
 # Could not dump table "foods_fts_idx" because of following StandardError
 #   Unknown type '' for column 'segid'
 
+
+  create_table "oauth_access_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.integer "user_id", null: false
+    t.integer "oauth_application_id", null: false
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
+  end
+
+  create_table "oauth_applications", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "client_id", null: false
+    t.string "client_secret", null: false
+    t.string "redirect_uri", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_oauth_applications_on_client_id", unique: true
+  end
+
+  create_table "oauth_authorization_codes", force: :cascade do |t|
+    t.string "code", null: false
+    t.integer "user_id", null: false
+    t.integer "oauth_application_id", null: false
+    t.datetime "expires_at", null: false
+    t.boolean "used", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_oauth_authorization_codes_on_code", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
 end

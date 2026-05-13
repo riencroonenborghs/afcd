@@ -84,6 +84,7 @@ GEM
     ast (2.4.3)
     awesome_print (1.9.2)
     base64 (0.3.0)
+    bcrypt (3.1.22)
     bcrypt_pbkdf (1.1.2)
     bcrypt_pbkdf (1.1.2-arm64-darwin)
     bcrypt_pbkdf (1.1.2-x86_64-darwin)
@@ -401,6 +402,7 @@ PLATFORMS
 DEPENDENCIES
   annotaterb (~> 4.22)
   awesome_print (~> 1.9)
+  bcrypt (~> 3.1)
   bcrypt_pbkdf (~> 1.1)
   bootsnap
   brakeman

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
+    .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%; max-width: 360px; }
+    h1 { margin: 0 0 1.5rem; font-size: 1.5rem; }
+    label { display: block; margin-bottom: 0.25rem; font-size: 0.875rem; font-weight: 500; }
+    input { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; box-sizing: border-box; margin-bottom: 1rem; }
+    button { width: 100%; padding: 0.625rem; background: #2563eb; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    .alert { background: #fee2e2; color: #991b1b; padding: 0.75rem; border-radius: 4px; margin-bottom: 1rem; font-size: 0.875rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Sign In</h1>
+    <% if flash[:alert] %>
+      <div class="alert"><%= flash[:alert] %></div>
+    <% end %>
+    <%= form_with url: oauth_session_path, method: :post do |f| %>
+      <%= hidden_field_tag :return_to, @return_to %>
+      <label>Email</label>
+      <%= f.email_field :email, required: true, autofocus: true %>
+      <label>Password</label>
+      <%= f.password_field :password, required: true %>
+      <%= f.submit "Sign In" %>
+    <% end %>
+  </div>
+</body>
+</html>
