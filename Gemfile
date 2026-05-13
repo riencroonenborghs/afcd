@@ -20,6 +20,8 @@ group :development, :test do
   gem "annotaterb", "~> 4.22"
   gem "awesome_print", "~> 1.9"
   gem "roo", "~> 3.0"
+  gem "rspec-rails", "~> 7.0"
+  gem "factory_bot_rails"
 end
 
 group :development do
