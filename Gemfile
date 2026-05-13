@@ -10,6 +10,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "bootsnap", require: false
 gem "fast-mcp", "~> 1.6"
+gem "doorkeeper", "~> 5.8"
 gem "dotenv-rails", "~> 3.2"
 
 group :development, :test do
