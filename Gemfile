@@ -30,7 +30,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv'        # or capistrano-rvm depending on your ruby manager
-  gem "capistrano3-puma", "~> 7.1"
+  gem "capistrano3-puma", "~> 8.1"
   gem 'capistrano-nvm', require: false
 
   # capistrano

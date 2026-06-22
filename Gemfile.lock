@@ -110,12 +110,12 @@ GEM
     capistrano-rbenv (2.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capistrano3-puma (7.1.0)
+    capistrano3-puma (8.1.0)
       capistrano (~> 3.7)
       capistrano-bundler
-      puma (>= 6.1, < 8.0)
+      puma (>= 6.1, < 9.0)
     cgi (0.5.1)
-    concurrent-ruby (1.3.6)
+    concurrent-ruby (1.3.7)
     connection_pool (3.0.2)
     crass (1.0.6)
     csv (3.3.5)
@@ -169,7 +169,7 @@ GEM
       rack (>= 2.0, < 4.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    i18n (1.14.8)
+    i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
@@ -409,7 +409,7 @@ DEPENDENCIES
   capistrano-nvm
   capistrano-rails
   capistrano-rbenv
-  capistrano3-puma (~> 7.1)
+  capistrano3-puma (~> 8.1)
   debug
   dotenv-rails (~> 3.2)
   ed25519 (~> 1.4)
