@@ -16,7 +16,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
-  gem "annotaterb", "~> 4.22"
+  gem "annotaterb", "~> 4.23"
   gem "awesome_print", "~> 1.9"
   gem "roo", "~> 3.0"
 end
